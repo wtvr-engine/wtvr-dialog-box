@@ -1,0 +1,57 @@
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>WTVR Dialog box example</title>
+</head>
+<body>
+  <style>
+  body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+    height: 100vh;
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  wtvr-dialog-box {
+    display : block;
+    color : white;
+    width: 700px;
+    max-width : 100%;
+  }
+  </style>
+  <wtvr-dialog-box id="demo-box">
+    <wtvr-expressive-text>
+      <p>Hey! How are you doing?</p>
+    </wtvr-expressive-text>
+    <wtvr-expressive-text>
+        <p>You're shy, <span style="font-style: italic;">aren't you?</span></p>
+      </wtvr-expressive-text>
+      <wtvr-expressive-text>
+        <p>Well, dont worry, I got plenty of text for the both of us.</p>
+      </wtvr-expressive-text>
+      <wtvr-expressive-text>
+        <p>Isn't it <span data-letter-effect="wavy-rainbow">fantastic</span>?</p>
+      </wtvr-expressive-text>
+</wtvr-dialog-box>
+    <div>
+      <button id="next">Next</button>
+    </div>
+    
+    <script type="module">
+    import WTVRExpressiveText from './node_modules/wtvr-expressive-text/wtvr-expressive-text.js';
+    import WTVRDialogBox from './wtvr-dialog-box.js';
+    customElements.define("wtvr-expressive-text", WTVRExpressiveText);
+    customElements.define("wtvr-dialog-box",WTVRDialogBox);
+    let demoBox = document.getElementById("demo-box");
+    let nextButton = document.getElementById("next");
+    nextButton.addEventListener("click", () => {
+      demoBox.next();
+    });
+    demoBox.addEventListener("end", (e) => {
+      nextButton.style.display = "none";
+    });
+    </script>
+</body>
+</html>
