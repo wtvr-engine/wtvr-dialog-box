@@ -1,0 +1,28 @@
+{
+  "name": "wtvr-dialog-box",
+  "version": "1.0.0",
+  "description": "A dialog box using wtvr-expressive-text to display text visual novel-style",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wtvr-engine/wtvr-dialog-box.git"
+  },
+  "keywords": [
+    "visual",
+    "novel",
+    "text",
+    "dialog"
+  ],
+  "author": "John Tiesselune <john@tiesselune.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wtvr-engine/wtvr-dialog-box/issues"
+  },
+  "homepage": "https://github.com/wtvr-engine/wtvr-dialog-box#readme",
+  "dependencies": {
+    "wtvr-element": "git+https://github.com/wtvr-engine/wtvr-element.git"
+  }
+}
