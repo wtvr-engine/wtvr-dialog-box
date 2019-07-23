@@ -28,6 +28,8 @@ export default class WTVRDialogBox extends WTVRElement {
         if(this.children.length > this.currentLine){
             let currentSentence = this.children[this.currentLine];
             currentSentence.hidden = false;
+            let event = new CustomEvent("line", {detail: { index : this.currentLine, element : currentSentence}});
+            this.dispatchEvent(event);
             if(this.currentLine > 0){
                 this.children[this.currentLine-1].hidden = true;
             }
@@ -40,7 +42,7 @@ export default class WTVRDialogBox extends WTVRElement {
     onEnd(){
         let event = new CustomEvent("end", {detail: {}});
         this.dispatchEvent(event);
-      }
+    }
     
     next(){
         let currentSentence = this.children[this.currentLine];
