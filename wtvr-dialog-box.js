@@ -18,10 +18,13 @@ export default class WTVRDialogBox extends WTVRElement {
                 this.children[this.children.length - 1].addEventListener("end",() => {
                     this.onEnd();
                 });
-            }
-            this.displayLine();
-            
+            }        
         }
+    }
+
+    start(){
+        super.start();
+        this.displayLine();
     }
 
     displayLine(){
