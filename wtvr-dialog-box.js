@@ -12,14 +12,6 @@ export default class WTVRDialogBox extends WTVRElement {
         for(let child of this.children){
             child.hidden = true;
         }
-        if(this.children.length > 0){
-            let lastChild = this.children[this.children.length - 1];
-            if(lastChild instanceof WTVRExpressiveText){
-                this.children[this.children.length - 1].addEventListener("end",() => {
-                    this.onEnd();
-                });
-            }        
-        }
     }
 
     start(){
@@ -52,8 +44,10 @@ export default class WTVRDialogBox extends WTVRElement {
         if(currentSentence instanceof WTVRExpressiveText && !currentSentence.finished){
             currentSentence.rush();
             return;
-        }else if(this.currentLine + 1 == this.children.length - 1){
+        }else if(this.currentLine == this.children.length - 1){
+            this.children[this.currentLine].hidden = true;
             this.onEnd();
+            return;
         }
         this.currentLine++;
         this.displayLine();
