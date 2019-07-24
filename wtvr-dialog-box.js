@@ -6,6 +6,8 @@ export default class WTVRDialogBox extends WTVRElement {
         super();
         this.currentLine = 0;
         this.init();
+        this.getNumberAttribute("autoplay",-1);
+        this.autoPlayTimer = null;
     }
 
     init(){
@@ -30,6 +32,13 @@ export default class WTVRDialogBox extends WTVRElement {
             }
             if(currentSentence instanceof WTVRExpressiveText){
                 currentSentence.start();
+                if(this.autoplay > 0){
+                    currentSentence.addEventListener("end", (e) => {
+                        this.autoPlayTimer = setTimeout(() => {
+                            this.next();
+                        },this.autoplay * 1000)
+                    })
+                }
             }
         }
     }
@@ -40,6 +49,9 @@ export default class WTVRDialogBox extends WTVRElement {
     }
     
     next(){
+        if(this.autoPlayTimer){
+            clearTimeout(this.autoPlayTimer);
+        }
         let currentSentence = this.children[this.currentLine];
         if(currentSentence instanceof WTVRExpressiveText && !currentSentence.finished){
             currentSentence.rush();
