@@ -1,6 +1,7 @@
 <html>
 <head>
 <meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WTVR Dialog box example</title>
 </head>
 <body>
@@ -18,7 +19,12 @@
     display : block;
     color : white;
     width: 700px;
-    max-width : 100%;
+    margin : auto;
+    max-width : 90%;
+    text-align: center;
+  }
+  wtvr-expressive-text {
+    --specialColor : blue;
   }
   </style>
   <wtvr-dialog-box id="demo-box" auto>
@@ -38,7 +44,7 @@
         <p>Anyway, time to stop talking. This has been fun.</p>
       </wtvr-expressive-text>
       <wtvr-expressive-text>
-        <p>Have a good day! See you soon!
+        <p>Have a good day! <span class="special">See you soon!</span>
         </p>
       </wtvr-expressive-text>
 </wtvr-dialog-box>
