@@ -7,6 +7,7 @@ export default class WTVRDialogBox extends WTVRElement {
         this.currentLine = 0;
         this.init();
         this.getNumberAttribute("autoplay",-1);
+        this.getNumberAttribute("linedelay",0.4);
         this.autoPlayTimer = null;
     }
 
@@ -31,7 +32,9 @@ export default class WTVRDialogBox extends WTVRElement {
                 this.children[this.currentLine-1].hidden = true;
             }
             if(currentSentence instanceof WTVRExpressiveText){
+                setTimeout(() => {
                 currentSentence.start();
+                },this.linedelay *1000);
                 if(this.autoplay > 0){
                     currentSentence.addEventListener("end", (e) => {
                         this.autoPlayTimer = setTimeout(() => {
