@@ -1,70 +1,78 @@
 <html>
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WTVR Dialog box example</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WTVR Dialog box example</title>
 </head>
 <body>
   <style>
-  body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: black;
-    height: 100vh;
-    display : flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  wtvr-dialog-box {
-    display : block;
-    color : white;
-    width: 700px;
-    margin : auto;
-    max-width : 90%;
-    text-align: center;
-  }
-  wtvr-expressive-text {
-    --specialColor : blue;
-  }
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: black;
+      position : absolute;
+      bottom : 0;
+      left : 0;
+      right :0;
+      top : 0;
+      display : flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    wtvr-dialog-box {
+      display : block;
+      color : white;
+      width: 700px;
+      margin : auto;
+      max-width : 90%;
+      text-align: center;
+    }
+    wtvr-expressive-text {
+      --specialColor : blue;
+    }
   </style>
-  <wtvr-dialog-box id="demo-box" auto>
-    <wtvr-expressive-text>
-      <p>Hey! How are you doing?</p>
-    </wtvr-expressive-text>
-    <wtvr-expressive-text>
-        <p>You're shy, <span style="font-style: italic;">aren't you?</span></p>
+  <main hidden>
+    <wtvr-dialog-box id="demo-box" auto>
+      <wtvr-expressive-text>
+        <p>Hey there! This is a demo dialog box, <span style="font-style: blod;">click</span> or <span style="font-style: blod;">press space</span> to try me out!</p>
       </wtvr-expressive-text>
       <wtvr-expressive-text>
-        <p>Well, dont worry, I got plenty of text for the both of us.</p>
+        <p>Great job! You can style any text in here. However you like.</p>
       </wtvr-expressive-text>
       <wtvr-expressive-text>
-        <p>Isn't it <span data-letter-effect="wavy-rainbow">fantastic</span>?</p>
+        <p>What about some <span style="font-size : 1.7em;">big text</span>, or some <span style="color : green;">green text</span>?</p>
       </wtvr-expressive-text>
       <wtvr-expressive-text>
-        <p>Anyway, time to stop talking. This has been fun.</p>
+        <p>You can even use <span data-letter-effect="spooky">special effects</span>, isn't it <span data-letter-effect="wavy-rainbow">fantastic</span>?</p>
       </wtvr-expressive-text>
       <wtvr-expressive-text>
-        <p>Have a good day! <span class="special">See you soon!</span>
+        <p>Or... You can <span data-pause="0.4"></span><span style="font-style : italic;">stress</span><span data-pause="0.4"></span> some <span data-pause="0.4"></span><span style="font-style : italic;">parts</span><span data-pause="0.4"></span> of your line using pauses.</p>
+      </wtvr-expressive-text>
+      <wtvr-expressive-text>
+        <p>Anyway, good talking to you! Hope I'll <span data-letter-effect="wavy-rainbow">see you soon!</span>
         </p>
       </wtvr-expressive-text>
-</wtvr-dialog-box>
-    <div>
-      <button id="next">Next</button>
-    </div>
-    
-    <script type="module">
+    </wtvr-dialog-box>
+  </main>
+  
+  <script type="module">
     import WTVRExpressiveText from './node_modules/wtvr-expressive-text/wtvr-expressive-text.js';
     import WTVRDialogBox from './wtvr-dialog-box.js';
     customElements.define("wtvr-expressive-text", WTVRExpressiveText);
     customElements.define("wtvr-dialog-box",WTVRDialogBox);
     let demoBox = document.getElementById("demo-box");
-    let nextButton = document.getElementById("next");
-    nextButton.addEventListener("click", () => {
+    document.body.addEventListener("click", () => {
       demoBox.next();
     });
+    document.body.onkeyup = function(e){
+      if(e.keyCode == 32 || e.keyCode == 13){
+        demoBox.next();
+      }
+    };
     demoBox.addEventListener("end", (e) => {
-      nextButton.style.display = "none";
+      document.getElementById("pressspace").style.display = "none";
     });
-    </script>
+    document.querySelector("main").hidden = false;
+  </script>
 </body>
 </html>
