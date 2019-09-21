@@ -1,5 +1,5 @@
-import WTVRElement from "./node_modules/wtvr-element/wtvr-element.js";
-import WTVRExpressiveText from "./node_modules/wtvr-expressive-text/wtvr-expressive-text.js";
+import WTVRElement from "./wtvr_modules/wtvr-element/wtvr-element.js";
+import WTVRExpressiveText from "./wtvr_modules/wtvr-expressive-text/wtvr-expressive-text.js";
 
 export default class WTVRDialogBox extends WTVRElement {
     constructor(){
