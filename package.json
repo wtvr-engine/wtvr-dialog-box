@@ -25,5 +25,6 @@
   "dependencies": {
     "wtvr-element": "git+https://github.com/wtvr-engine/wtvr-element.git",
     "wtvr-expressive-text": "git+https://github.com/wtvr-engine/wtvr-expressive-text.git"
-  }
+  },
+  "wtvr-module":true
 }
