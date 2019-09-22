@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "flatten":"node ./node_modules/wtvr-cli/wtvr-cli.js flatten"
+    "flatten": "node ./node_modules/wtvr-cli/wtvr-cli.js flatten",
+    "serve": "node ./node_modules/wtvr-cli/wtvr-cli.js serve"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
   "wtvr-module": {
     "files": [
       "wtvr-dialog-box.js"
-    ]
+    ],
+    "index" : "demo.html"
   }
 }
