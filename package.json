@@ -25,9 +25,11 @@
   },
   "homepage": "https://github.com/wtvr-engine/wtvr-dialog-box#readme",
   "dependencies": {
-    "wtvr-cli": "git+https://github.com/wtvr-engine/wtvr-cli.git",
     "wtvr-element": "git+https://github.com/wtvr-engine/wtvr-element.git",
     "wtvr-expressive-text": "git+https://github.com/wtvr-engine/wtvr-expressive-text.git"
+  },
+  "devDependencies": {
+    "wtvr-cli": "git+https://github.com/wtvr-engine/wtvr-cli.git"
   },
   "wtvr-module": {
     "files": [
