@@ -2,11 +2,10 @@
   "name": "wtvr-dialog-box",
   "version": "1.0.0",
   "description": "A dialog box using wtvr-expressive-text to display text visual novel-style",
-  "main": "index.js",
+  "main": "wtvr-dialog-box.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "flatten": "node ./node_modules/wtvr-cli/wtvr-cli.js flatten",
-    "serve": "node ./node_modules/wtvr-cli/wtvr-cli.js serve"
+    "start": "es-dev-server --app-index demo.html --compatibility all --node-resolve --open --watch"
   },
   "repository": {
     "type": "git",
@@ -29,12 +28,6 @@
     "wtvr-expressive-text": "git+https://github.com/wtvr-engine/wtvr-expressive-text.git"
   },
   "devDependencies": {
-    "wtvr-cli": "git+https://github.com/wtvr-engine/wtvr-cli.git"
-  },
-  "wtvr-module": {
-    "files": [
-      "wtvr-dialog-box.js"
-    ],
-    "index": "demo.html"
+    "es-dev-server": "^1.18.4"
   }
 }
