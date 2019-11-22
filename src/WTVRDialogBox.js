@@ -19,6 +19,7 @@ export class WTVRDialogBox extends WTVRElement {
 
     start(){
         super.start();
+        this.init();
         this.displayLine();
     }
 
