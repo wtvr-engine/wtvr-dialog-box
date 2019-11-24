@@ -9,12 +9,26 @@ export class WTVRDialogBox extends LitElement {
         this.currentIndex = 0;
         this.lineDelay = 0.4;
         this.getTo(this.currentIndex);
+        this.auto = false;
+        this.started = false;
     }
     static get properties() {
         return { 
             currentIndex : { type : Number },
             lineDelay : { type : Number },
+            auto : {type : Boolean},
+            started : {type : Boolean},
         }
+    }
+
+    firstUpdated(){
+        if(this.auto){
+            this.started = true;
+        }
+    }
+
+    start(){
+        this.started = true;
     }
 
     getTo(index){
@@ -51,7 +65,7 @@ export class WTVRDialogBox extends LitElement {
     }
 
     next(){
-        if(this.currentLine && !this.currentLine.finished){
+        if(this.started && this.currentLine && !this.currentLine.finished){
             this.currentLine.rush();
         }
         else{
@@ -61,7 +75,7 @@ export class WTVRDialogBox extends LitElement {
 
     render(){
         this.getTo(this.currentIndex);
-        if(this.currentLine){
+        if(this.currentLine && this.started){
             setTimeout(() => {
                 this.currentLine.start();
                 this.dispatchCustomEvent("line");
