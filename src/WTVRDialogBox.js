@@ -1,72 +1,72 @@
-import { WTVRElement } from "wtvr-element";
+import { LitElement, html } from "lit-element";
 import { WTVRExpressiveText } from "wtvr-expressive-text";
 
-export class WTVRDialogBox extends WTVRElement {
+
+export class WTVRDialogBox extends LitElement {
+
     constructor(){
         super();
-        this.currentLine = 0;
-        this.init();
-        this.getNumberAttribute("autoplay",-1);
-        this.getNumberAttribute("linedelay",0.4);
-        this.autoPlayTimer = null;
+        this.currentIndex = 0;
+        this.lineDelay = 0.4;
+        this.getTo(this.currentIndex);
     }
-
-    init(){
-        for(let child of this.children){
-            child.hidden = true;
+    static get properties() {
+        return { 
+            currentIndex : { type : Number },
+            lineDelay : { type : Number },
         }
     }
 
-    start(){
-        super.start();
-        this.init();
-        this.displayLine();
-    }
-
-    displayLine(){
-        if(this.children.length > this.currentLine){
-            let currentSentence = this.children[this.currentLine];
-            currentSentence.hidden = false;
-            let event = new CustomEvent("line", {detail: { index : this.currentLine, element : currentSentence}});
-            this.dispatchEvent(event);
-            if(this.currentLine > 0){
-                this.children[this.currentLine-1].hidden = true;
-            }
-            if(currentSentence instanceof WTVRExpressiveText){
-                setTimeout(() => {
-                currentSentence.start();
-                },this.linedelay *1000);
-                if(this.autoplay > 0){
-                    currentSentence.addEventListener("end", (e) => {
-                        this.autoPlayTimer = setTimeout(() => {
-                            this.next();
-                        },this.autoplay * 1000)
-                    })
+    getTo(index){
+        let counter = 0;
+        if(this.currentLine){
+            this.currentLine.removeAttribute("slot");
+        }
+        for(let i = 0; i < this.childNodes.length; i++){
+            if(this.childNodes[i] instanceof WTVRExpressiveText){
+                if(counter === index){
+                    this.childNodes[i].setAttribute("slot","current-line");
+                    this.currentLine = this.childNodes[i];
+                    return;
+                }
+                else {
+                    counter += 1;
                 }
             }
         }
+        this.currentLine = null;
+        this.dispatchCustomEvent("end");
     }
 
-    onEnd(){
-        let event = new CustomEvent("end", {detail: {}});
+    dispatchCustomEvent(eventName){
+        let dataArray = [];
+        if(this.currentLine){
+            const data = this.currentLine.getAttribute("data-event");
+            if(data){
+                dataArray = data.split(" ");
+            }
+        }
+        let event = new CustomEvent(eventName, {detail: { index : this.currentIndex, element : this.currentLine, data : dataArray}});
         this.dispatchEvent(event);
     }
-    
+
     next(){
-        if(this.autoPlayTimer){
-            clearTimeout(this.autoPlayTimer);
+        if(this.currentLine && !this.currentLine.finished){
+            this.currentLine.rush();
         }
-        let currentSentence = this.children[this.currentLine];
-        if(currentSentence instanceof WTVRExpressiveText && !currentSentence.finished){
-            currentSentence.rush();
-            return;
-        }else if(this.currentLine == this.children.length - 1){
-            this.children[this.currentLine].hidden = true;
-            this.onEnd();
-            return;
+        else{
+            this.currentIndex += 1;
         }
-        this.currentLine++;
-        this.displayLine();
     }
 
+    render(){
+        this.getTo(this.currentIndex);
+        if(this.currentLine){
+            setTimeout(() => {
+                this.currentLine.start();
+                this.dispatchCustomEvent("line");
+            },this.lineDelay * 1000);
+        }
+        return html`<slot name="current-line"></slot>`;
+    }
 }

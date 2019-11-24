@@ -32,7 +32,7 @@
     }
   </style>
   <main hidden>
-    <wtvr-dialog-box id="demo-box" auto>
+    <wtvr-dialog-box id="demo-box">
       <wtvr-expressive-text>
         <p>Hey there! This is a demo dialog box, <span style="font-style: blod;">click</span> or <span style="font-style: blod;">press space</span> to try me out!</p>
       </wtvr-expressive-text>
@@ -66,9 +66,6 @@
         demoBox.next();
       }
     };
-    demoBox.addEventListener("end", (e) => {
-      document.getElementById("pressspace").style.display = "none";
-    });
     document.querySelector("main").hidden = false;
   </script>
 </body>

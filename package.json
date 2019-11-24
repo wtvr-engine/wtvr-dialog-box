@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/wtvr-engine/wtvr-dialog-box#readme",
   "dependencies": {
-    "wtvr-element": "git+https://github.com/wtvr-engine/wtvr-element.git",
+    "lit-element": "^2.2.1",
     "wtvr-expressive-text": "git+https://github.com/wtvr-engine/wtvr-expressive-text.git"
   },
   "devDependencies": {
