@@ -27,6 +27,18 @@ export class WTVRDialogBox extends LitElement {
         }
     }
 
+    reset(){
+        this.currentIndex = 0;
+        for(let i = 0; i < this.childNodes.length; i++){
+            if(this.childNodes[i] instanceof WTVRExpressiveText){
+                this.childNodes[i].currentIndex = 0;
+                this.childNodes[i].finished = false;
+                this.childNodes[i].rushing = false;
+            }
+        }
+        this.getTo(this.currentIndex);
+    }
+
     start(){
         this.started = true;
     }
